@@ -2,10 +2,12 @@ library(EBImage)
 library(e1071)
 
 # count the number of total images
-wd.top <- "C:/Users/edz504/Documents/Data Science Projects/Kaggle/plankton/train"
+wd.top <- "C:/Users/edz504/Documents/Data Science Projects/Kaggle/plankton"
+wd.train <- paste(wd.top, "/train", sep="")
+setwd(wd.train)
 num.img <- 0
 for (class in list.files()) {
-    setwd(paste(wd.top, "/", class, sep=""))
+    setwd(paste(wd.train, "/", class, sep=""))
     num.img <- num.img + length(list.files())
 }
 
@@ -16,9 +18,9 @@ colnames(train.dim) <- c("rows", "cols", "class")
 c <- 1
 # img counter
 i <- 1
-setwd(wd.top)
+setwd(wd.train)
 for (class in list.files()) {
-    setwd(paste(wd.top, "/", class, sep=""))
+    setwd(paste(wd.train, "/", class, sep=""))
     for (file in list.files()) {
         img <- readImage(file)
         train.dim[i, ] <- c(nrow(img), ncol(img), c)
@@ -44,22 +46,30 @@ train.dim %>%
 apply(train.dim, FUN=min, 2)
 # make them all 30 x 30
 
-train.data.1 <- matrix(nrow = num.img, ncol = 30 * 30 + 1)
-setwd(wd.top)
+train.data.1 <- matrix(nrow = num.img, ncol = 30 * 30)
+labels <- rep(NA, num.img)
+setwd(wd.train)
 c <- 1
 i <- 1
 for (class in list.files()) {
-    setwd(paste(wd.top, "/", class, sep=""))
+    setwd(paste(wd.train, "/", class, sep=""))
     for (file in list.files()) {
         img <- readImage(file)
-        train.data.1[i, 1] <- c
-        train.data.1[i, 2:901] <- as.vector(resize(img, 30, 30))
+        labels[i] <- c
+        train.data.1[i, ] <- as.vector(resize(img, 30, 30))
         i <- i + 1
     }
     c <- c + 1
 }
 
+# make labels a factor
+labels <- factor(labels)
 
+# save the training and testing data
+setwd(wd.top)
+save(train.data.1, labels, file="training_30x30.RData")
+
+svm_model <- svm(train.in, train.out, type='C', kernel='linear')
 
 
 
