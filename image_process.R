@@ -69,8 +69,31 @@ labels <- factor(labels)
 setwd(wd.top)
 save(train.data.1, labels, file="training_30x30.RData")
 
-svm_model <- svm(train.in, train.out, type='C', kernel='linear')
+# visualize how many of each type
+library(ggplot2)
+labels.df <- data.frame(labels)
+counts <- labels.df %>% group_by(labels) %>% summarise(count=n())
+ggplot(counts, aes(x=labels, y=count)) + geom_bar(stat="identity")
+ggsave(file="label_counts.png", width=10, height=6)
+
+# we can get 7 different labels using rows 1-2000, so let's try
+# on that just to see what it looks like (and to time and get an idea for it)
+svm_model <- svm(train.data.1[1:2000,], labels[1:2000], type='C', kernel='linear',
+    probability=TRUE)
+# note, takes roughly 30 sec
+
+pred <- predict(svm_model, train.data.1[1:2000,],
+    probability = TRUE)
+attr(pred, "probabilities")[1:10,]
+
+#
 
 
 
-# resize upwards (more pixels = more data, but may be unnecessar)
+
+
+
+
+
+
+# resize upwards
