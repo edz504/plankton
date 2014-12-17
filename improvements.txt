@@ -1,0 +1,8 @@
+- use all images (instead of max 100 from each class)
+- resize to larger than 30x30
+- use width-to-length ratio of the object
+    = segment image 
+        * threshold the image on the mean value (reduces noise)
+        * dilate image to connect neighboring pixels
+        * calculate labels for connected regions
+        * apply the original threshold to the labels to label the original, undilated regions
