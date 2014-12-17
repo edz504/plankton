@@ -59,9 +59,13 @@ M <- max(prealloc, nrow(test.data.1) / F)
 selected.data <- data.frame(rbind(selected.train,
     test.data.1[sample(nrow(test.data.1), M), ]))
 selected.data.labels <- c(selected.labels, rep(NA, M))
+# the last M are NA because they don't have labels, but
+# we have the known labels for the training set
 
 start.time <- Sys.time()
 mixmod.semi <- mixmodCluster(selected.data, nbCluster=121,
     knownLabels=selected.data.labels)
 end.time <- Sys.time()
-print(end.time - start.time1)
+print(end.time - start.time)
+# 27 min to train
+save(mixmod.semi, file="mixmodel_N100_F10_30x30.RData")

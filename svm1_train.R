@@ -22,8 +22,8 @@ inds.df <- labels.df %>%
     group_by(labels) %>%
         summarise(first_ind=min(ind), last_ind=max(ind))
 
-# find pre-allocation space (first N)
-N <- 100
+# find pre-allocation space (first N -- 2000 is all)
+N <- 2000
 prealloc <- 0
 for (i in seq(1, nrow(counts), by=1)) {
     if (counts$count[i] > N) {
@@ -33,7 +33,9 @@ for (i in seq(1, nrow(counts), by=1)) {
     }
 }
 
-# pre-allocate (9045 here)
+# pre-allocate
+# (9045 for N=100)
+# (30336 for N=1000)
 selected.ind <- rep(NA, prealloc)
 j <- 1
 for (i in seq(1, nrow(inds.df), by=1)) {
@@ -60,8 +62,10 @@ svm_select <- svm(selected.train,
 end.time <- Sys.time()
 print(end.time - start.time)
 # note: 12-18 minutes to train on 9045
+# note: x min to train on 30336 (all)
 setwd(wd.top)
-save(svm_select, file="svmmodel_N100_30x30.RData")
+save(svm_select, file=paste("svmmodel_N", N ,"_30x30.RData",
+    sep=""))
 
 # check on the training sample
 start.time2 <- Sys.time()
