@@ -59,10 +59,11 @@ test.data.1 <- matrix(nrow = length(list.files()),
     ncol = 1 + 30 * 30)
 c <- 1
 i <- 1
-for (img in list.files()) {
+for (file in list.files()) {
     if (i %% 10000 == 0) {
         cat(i, "\n")
     }
+    img <- readImage(file)
     # adaptive threshold
     img2 <- thresh(img)
     segment.labels <- bwlabel(img2)
@@ -70,13 +71,13 @@ for (img in list.files()) {
     obj.label <- which.max(table(as.vector(segment.labels))[-1])
     if (length(obj.label) == 0) {
             ratio <- 0
-        } else {
-            obj.inds <- which(segment.labels == obj.label, 
-            arr.ind=TRUE)
-            ratio <- diff(range(obj.inds[,2])) / diff(range(obj.inds[,1]))
-        }
+    } else {
+        obj.inds <- which(segment.labels == obj.label, 
+        arr.ind=TRUE)
+        ratio <- diff(range(obj.inds[,2])) / diff(range(obj.inds[,1]))
+    }
     test.data.1[i, 1] <- ratio
-    test.data.1[i, 2:901] <- as.vector(resize(readImage(img), 30, 30))
+    test.data.1[i, 2:901] <- as.vector(resize(img, 30, 30))
     i <- i + 1
 }
 
