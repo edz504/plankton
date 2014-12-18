@@ -73,8 +73,11 @@ for (file in list.files()) {
             ratio <- 0
     } else {
         obj.inds <- which(segment.labels == obj.label, 
-        arr.ind=TRUE)
+            arr.ind=TRUE)
         ratio <- diff(range(obj.inds[,2])) / diff(range(obj.inds[,1]))
+        if (ratio == Inf | is.nan(ratio)) {
+            ratio <- 0
+        }
     }
     test.data.1[i, 1] <- ratio
     test.data.1[i, 2:901] <- as.vector(resize(img, 30, 30))

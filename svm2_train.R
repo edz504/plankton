@@ -6,9 +6,14 @@ wd.train <- paste(wd.top, "/train", sep="")
 
 load("training_30x30_wrRatio.RData")
 
-# fix NaN values
-train.data.1[12686, 1] <- 0
-train.data.1[13014, 1] <- 0
+# fix NaN values, NA values, inf values
+train.data.1[which(is.nan(train.data.1), arr.ind=TRUE)] <- 0
+
+inf.inds <- which(train.data.1 == Inf, arr.ind=TRUE)
+train.data.1[inf.inds] <- -1
+this.max <- max(train.data.1[, 1])
+# somewhat arbitrary
+train.data.1[inf.inds] <- this.max
 
 start.time <- Sys.time()
 svm_select <- svm(train.data.1,
