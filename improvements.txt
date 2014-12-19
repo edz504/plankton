@@ -1,8 +1,28 @@
-- use all images (instead of max 100 from each class)
-- resize to larger than 30x30
-- use width-to-length ratio of the object
-    = segment image 
-        * threshold the image on the mean value (reduces noise)
-        * dilate image to connect neighboring pixels
-        * calculate labels for connected regions
-        * apply the original threshold to the labels to label the original, undilated regions
+
+
+
+Submissions:
+- submission1 (failed)
+- submission 2
+    = svm with 900 features (30 x 30 resizing), first 100 of each class (9045 training)
+- submission 3
+    = same as submission 2 but with full training
+- submission 4
+    = added additional feature of segmented width-to-height ratio
+    = else, same as submission 3
+- submission 5
+    = width-height ratio from before
+    = used computeFeatures.shape, computeFeatures.shape on resized image (13 features)
+    = SVM
+    = CURRENT
+- submission 6
+    = same as above, with computeFeatures.moment, computeFeatures.haralick, and 25 x 25 pixels
+    = next ideas:
+        * low-pass (removes noise, blurs image)
+            - filter2, gblur
+        * high-pass (keeps the edges)
+            - filter2
+        * medianFilter
+        * use Conv Neural Net
+            - http://deeplearning.net/tutorial/lenet.html
+

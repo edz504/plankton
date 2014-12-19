@@ -1,7 +1,6 @@
 # same as original image processing (30x30) but with
 # width-to-height ratio via segmentation as suggested
 library(EBImage) 
-library(e1071)
 
 # count the number of total images
 wd.top <- "C:/Users/edz504/Documents/Data Science Projects/Kaggle/plankton"

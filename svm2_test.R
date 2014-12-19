@@ -1,8 +1,8 @@
 library(e1071)
 library(dplyr)
 
-load("testing_30x30.RData")
-load("svmmodel_N2000_30x30.RData")
+load("testing_30x30_wrRatio.RData")
+load("svmmodel_all_30x30_wrRatio.RData")
 top.wd <- "C:/Users/edz504/Documents/Data Science Projects/Kaggle/plankton/"
 
 setwd("test")
@@ -13,7 +13,7 @@ header <- t(data.frame(c("image", list.files())))
 # use on testing set given, in chunks of 1000 
 # init file first
 setwd(top.wd)
-write.table(header, file="submission3.csv", quote=FALSE,
+write.table(header, file="submission4.csv", quote=FALSE,
     col.names = FALSE, row.names=FALSE, sep=",")
 
 INCR <- 999
@@ -31,7 +31,7 @@ while (TRUE) {
         probability=TRUE)
     probs <- attr(pred, "probabilities")
     output <- cbind(test.files[these.inds], probs)
-    write.table(output, file="submission3.csv", append=TRUE,
+    write.table(output, file="submission4.csv", append=TRUE,
         quote=FALSE, col.names = FALSE, row.names=FALSE, sep=",")
     if (length(these.inds) < 1000) {
         break
