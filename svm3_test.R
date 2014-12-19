@@ -19,6 +19,8 @@ write.table(header, file="submission5.csv", quote=FALSE,
     col.names = FALSE, row.names=FALSE, sep=",")
 
 # fix the NA features (try 0 for now)
+# later, should examine more why these features are NA
+# also check out svm documentation regarding na.action
 na.inds <- which(is.na(test.data.scaled), arr.ind=TRUE)
 test.data.scaled[na.inds] <- 0
 
