@@ -76,7 +76,7 @@ for (class in list.files()) {
         # moment features
         mom.feat <- computeFeatures.moment(segment.labels)
         if (length(mom.feat) == 0) {
-            trai.ndata.1[i, 14:18] <- rep(NA, 5)
+            train.data.1[i, 14:18] <- rep(NA, 5)
         } else {
             train.data.1[i, 14:18] <- mom.feat[max.area.ind,]
         }
