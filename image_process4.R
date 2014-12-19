@@ -91,23 +91,30 @@ for (class in list.files()) {
 
         # haralick features
         haral.feat <- tryCatch({
-            return(computeFeatures.haralick(img, segment.labels)[1,])
+            computeFeatures.haralick(img, segment.labels)[1,]
         }, warning = function(w) {
         }, error = function(e) {
-            return(rep(NA, 26))
+            rep(NA, 26)
         }, finally = {
         })
+        if (length(haral.feat) == 0) {
+            haral.feat <- rep(NA, 26)
+        }
+
         train.data.1[i, 24:49] <- haral.feat
 
         # resized haralick features
         haral.feat.resize <- tryCatch({
-            return(computeFeatures.haralick(img.resize,
-                resize.segment.labels)[1,])
+            computeFeatures.haralick(img.resize,
+                resize.segment.labels)[1,]
         }, warning = function(w) {
         }, error = function(e) {
-            return(rep(NA, 26))
+            rep(NA, 26)
         }, finally = {
         })
+        if (length(haral.feat.resize) == 0) {
+            haral.feat.resize <- rep(NA, 26)
+        }
 
         train.data.1[i, 50:75] <- haral.feat.resize
 
@@ -216,21 +223,21 @@ for (file in list.files()) {
 
     # haralick features
     haral.feat <- tryCatch({
-        return(computeFeatures.haralick(img, segment.labels)[1,])
+        computeFeatures.haralick(img, segment.labels)[1,]
     }, warning = function(w) {
     }, error = function(e) {
-        return(rep(NA, 26))
+        rep(NA, 26)
     }, finally = {
     })
     test.data.1[i, 24:49] <- haral.feat
 
     # resized haralick features
     haral.feat.resize <- tryCatch({
-        return(computeFeatures.haralick(img.resize,
-            resize.segment.labels)[1,])
+        computeFeatures.haralick(img.resize,
+            resize.segment.labels)[1,]
     }, warning = function(w) {
     }, error = function(e) {
-        return(rep(NA, 26))
+        rep(NA, 26)
     }, finally = {
     })
 
