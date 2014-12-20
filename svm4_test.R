@@ -51,11 +51,8 @@ end.time2 <- Sys.time()
 print(end.time2 - start.time2)
 print(paste("Check indicies?:", all(check.inds == 1:130400)))
 print(paste("Check output length?:", check.length == 130400))
-# time to predict all with model 901 feat trained on all:
-# 2.04 hours
-# time to predict all with model 12 feat trained on all:
-# 22 min
-
+# time to predict all with model 975 feat trained on all:
+# X
       
 # check number of rows
 s6 <- read.csv("submission/submission6.csv")
