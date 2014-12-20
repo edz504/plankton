@@ -14,9 +14,12 @@ Submissions:
     = width-height ratio from before
     = used computeFeatures.shape, computeFeatures.shape on resized image (13 features)
     = SVM
-    = CURRENT
 - submission 6
-    = same as above, with computeFeatures.moment, computeFeatures.haralick, and 25 x 25 pixels
+    = same as above, with computeFeatures.moment, computeFeatures.haralick, and 30 x 30 pixels
+    = RBF (radial basis) kernel instead of linear
+
+
+- submission 7
     = next ideas:
         * low-pass (removes noise, blurs image)
             - filter2, gblur

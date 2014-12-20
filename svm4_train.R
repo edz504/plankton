@@ -8,11 +8,11 @@ load("training_pixelandallEBfeat.RData")
 
 start.time <- Sys.time()
 svm_select <- svm(train.data.scaled,
-    labels, type='C', kernel='linear',
+    labels, type='C', kernel='radial',
     probability=TRUE)
 end.time <- Sys.time()
 print(end.time - start.time)
-# note: 12-18 minutes to train on 9045
-# note: 2.82 hours to train on 30336 (all)
+# note: with 975 features, 30336 (all) training data, 
+# and an RBF kernel, time taken = 3.8 hours
 setwd(wd.top)
 save(svm_select, file="svmmodel_pixelandallEBfeat.RData")

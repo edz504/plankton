@@ -147,10 +147,18 @@ train.data.1[na.inds] <- 0
 
 # scale and save the training data
 train.data.scaled <- scale(train.data.1)
+train.means <- apply(train.data.1, FUN=mean, 2)
+train.sds <- apply(train.data.1, FUN=sd, 2)
+
+# NaNs induced by zero variance in feature
+train.data.scaled[which(is.nan(train.data.scaled), arr.ind=TRUE)] <- 0
+
 setwd(wd.top)
-save(train.data.scaled, labels, file="training_pixelandallEBfeat.RData")
+save(train.data.scaled, labels, train.means, train.sds,
+    file="training_pixelandallEBfeat.RData")
 
 
+##### haven't done this yet
 ############################3
 
 # and testing data
