@@ -237,6 +237,9 @@ for (file in list.files()) {
         rep(NA, 26)
     }, finally = {
     })
+    if (length(haral.feat) == 0) {
+            haral.feat <- rep(NA, 26)
+        }
     test.data.1[i, 24:49] <- haral.feat
 
     # resized haralick features
@@ -248,7 +251,9 @@ for (file in list.files()) {
         rep(NA, 26)
     }, finally = {
     })
-
+    if (length(haral.feat.resize) == 0) {
+            haral.feat.resize <- rep(NA, 26)
+        }
     test.data.1[i, 50:75] <- haral.feat.resize
 
     # pixel features
@@ -271,6 +276,5 @@ na.inds <- which(is.na(test.data.1), arr.ind=TRUE)
 test.data.1[na.inds] <- 0
 
 # scale and save the training data
-test.data.scaled <- scale(test.data.1)
 setwd(wd.top)
-save(test.data.scaled, labels, file="testing_pixelandallEBfeat.RData")
+save(test.data.1, labels, file="testing_pixelandallEBfeat.RData")
