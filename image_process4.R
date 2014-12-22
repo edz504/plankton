@@ -275,6 +275,6 @@ test.data.1[inf.inds] <- this.max
 na.inds <- which(is.na(test.data.1), arr.ind=TRUE)
 test.data.1[na.inds] <- 0
 
-# scale and save the training data
+# scale and save the testing data
 setwd(wd.top)
 save(test.data.1, labels, file="testing_pixelandallEBfeat.RData")

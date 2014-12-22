@@ -1,7 +1,7 @@
 library(e1071)
 library(dplyr)
 
-load("testing_pixelandallEBfeat.RData")
+load("testing_scaled_pixelandallEBfeat.RData")
 load("svmmodel_pixelandallEBfeat.RData")
 
 top.wd <- "C:/Users/edz504/Documents/Data Science Projects/Kaggle/plankton/"
@@ -32,6 +32,7 @@ while (TRUE) {
     pred <- predict(svm_select,
         test.data.scaled[these.inds, ],
         probability=TRUE)
+    cat("done\n")
     probs <- attr(pred, "probabilities")
     cat("Probs dim=", dim(probs), "\n")
     cat("test.files[these.inds] length=", 
@@ -55,4 +56,4 @@ print(paste("Check output length?:", check.length == 130400))
 # X
       
 # check number of rows
-s6 <- read.csv("submission/submission6.csv")
+s6 <- read.csv("submission6.csv")
