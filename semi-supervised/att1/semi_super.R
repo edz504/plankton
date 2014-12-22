@@ -54,4 +54,28 @@ train.w.labels <- data.frame(class=all.labels[1:30336],
     all.data.scaled[1:30336, ])
 class.means <- train.w.labels %>%
     group_by(class) %>%
-        summarise_each(funs(mean))
+        summarise_each(funs(mean)) %>%
+            select(-class)
+
+#### execute semi-supervised EM
+
+s <- Sys.time()
+ret.EM <- init.EM(all.data.scaled, nclass=121,
+    lab = all.labels,
+    method="em.EM")
+e <- Sys.time()
+cat("EMCluster init took", s - e, "\n")
+
+s <- Sys.time()
+emcl <- emcluster(x=all.data.scaled,   # data
+    emobj=ret.EM,               # initialized object
+    Mu=class.means,             # centers (priors)
+    lab=all.labels) # labels for semi-supervised
+e <- Sys.time()
+cat("EMCluster alg took", s - e, "\n")
+
+s <- Sys.time()
+probs <- e.step(all.data.scaled, emobj=emcl, norm=TRUE)$Gamma
+e <- Sys.time()
+cat("EMCluster last e-step (prob retrieval) took", 
+    s - e, "\n")
