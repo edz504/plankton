@@ -1,6 +1,3 @@
-
-
-
 Submissions:
 - submission1 (failed)
 - submission 2
@@ -26,6 +23,7 @@ Submissions:
         * high-pass (keeps the edges)
             - filter2
         * medianFilter
+        * weighted SVM with boosting
+            - http://cran.r-project.org/web/packages/wSVM/wSVM.pdf
         * use Conv Neural Net
             - http://deeplearning.net/tutorial/lenet.html
-
