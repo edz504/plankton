@@ -1,4 +1,6 @@
 Submissions:
+
+SUPERVISED
 - submission1 (failed)
 - submission 2
     = svm with 900 features (30 x 30 resizing), first 100 of each class (9045 training)
@@ -14,26 +16,28 @@ Submissions:
 - submission 6
     = same as above, with computeFeatures.moment, computeFeatures.haralick, and 30 x 30 pixels
     = RBF (radial basis) kernel instead of linear
+
+SEMI SUPERVISED
 - submission 7
     = same as above
-    = add high pass version of all features (except 30x30)
-    = add low pass version of all features (except 30x30)
-    = with these additional features (total should be around 1100), use semi-supervised learning
-        * run clustering algorithm on the unlabeled testing set
-            - mclust
-        * get probabilities from that clustering algorithm
-            - note, must figure out mapping from classes to clusters
-        * somehow average the probabilities produced by the supervised SVM on testing set, and the probabilities produced by the clustering on the testing set
-
+    = use semi-supervised learning
+        * EMCluster with priors, partially labeled
 - submission 8
-    = next ideas:
-        * low-pass (removes noise, blurs image)
-            - filter2, gblur
-        * high-pass (keeps the edges)
-            - filter2
-        * medianFilter
-        * weighted SVM with boosting
-            - http://cran.r-project.org/web/packages/wSVM/wSVM.pdf
-        * use Conv Neural Net
-            - http://deeplearning.net/tutorial/lenet.html
-        * use semi-supervised learning
+    = run clustering algorithm on the unlabeled testing set
+        * mclust?
+    = get probabilities from that clustering algorithm
+        * note, must figure out mapping from classes to clusters
+    = somehow average the probabilities produced by the supervised SVM on testing set, and the probabilities produced by the clustering on the testing set
+
+----------------
+= next ideas:
+    * low-pass (removes noise, blurs image)
+        - filter2, gblur
+    * high-pass (keeps the edges)
+        - filter2
+    * medianFilter
+    * weighted SVM with boosting
+        - http://cran.r-project.org/web/packages/wSVM/wSVM.pdf
+    * use Conv Neural Net
+        - http://deeplearning.net/tutorial/lenet.html
+    * use semi-supervised learning
