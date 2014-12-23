@@ -18,7 +18,15 @@ load("testing_scaled_pixelandallEBfeat.RData")
 load("training_class_means.RData")
 library(dplyr)
 class.means <- class.means %>% select(-class)
-clus <- kcca(test.data.scaled, k=class.means, simple=TRUE)
+
+start.time <- Sys.time()
+print(start.time)
+clus <- kcca(as.matrix(test.data.scaled),
+    k=as.matrix(class.means), simple=TRUE)
+end.time <- Sys.time()
+print(end.time - start.time)
+
+save(clus, file="cluster_output_kcca.RData")
 
 assigned <- attr(clus, "cluster")
 centers <- attr(clus, "centers")
