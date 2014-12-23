@@ -21,13 +21,18 @@ SEMI SUPERVISED
 - submission 7
     = same as above
     = use semi-supervised learning
-        * EMCluster with priors, partially labeled
+        * using bgmm package instead of EMCluster
+        * also, use bagging (10000 training + 40000 testing for each bagging)
+
+
+        
 - submission 8
-    = run clustering algorithm on the unlabeled testing set
-        * mclust?
-    = get probabilities from that clustering algorithm
-        * note, must figure out mapping from classes to clusters
-    = somehow average the probabilities produced by the supervised SVM on testing set, and the probabilities produced by the clustering on the testing set
+    = h2o
+        * http://www.r-bloggers.com/things-to-try-after-user-part-1-deep-learning-with-h2o/
+- submission 9
+    = use ensemble
+        - average probabilities of best pure supervised SVM (submission 6), semi-supervised (EMCluster or bgmm, whichever does better), and deep learning (h2o)
+
 
 ----------------
 = next ideas:
@@ -38,6 +43,11 @@ SEMI SUPERVISED
     * medianFilter
     * weighted SVM with boosting
         - http://cran.r-project.org/web/packages/wSVM/wSVM.pdf
-    * use Conv Neural Net
-        - http://deeplearning.net/tutorial/lenet.html
     * use semi-supervised learning
+    * use R-h2o for s3vm
+    ???
+= run clustering algorithm on the unlabeled testing set
+    * mclust?
+= get probabilities from that clustering algorithm
+    * note, must figure out mapping from classes to clusters
+= somehow average the probabilities produced by the supervised SVM on testing set, and the probabilities produced by the clustering on the testing set

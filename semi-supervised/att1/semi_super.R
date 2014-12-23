@@ -48,7 +48,6 @@ all.data.scaled[inf.inds] <- this.max
 na.inds <- which(is.na(all.data.scaled), arr.ind=TRUE)
 all.data.scaled[na.inds] <- 0
 
-
 # find class centers from training only
 train.w.labels <- data.frame(class=all.labels[1:30336], 
     all.data.scaled[1:30336, ])
@@ -65,6 +64,7 @@ ret.EM <- init.EM(all.data.scaled, nclass=121,
     method="em.EM")
 e <- Sys.time()
 cat("EMCluster init took", s - e, "\n")
+### ^ that's the whole alg, not just init (but class means?...)
 
 s <- Sys.time()
 emcl <- emcluster(x=all.data.scaled,   # data
@@ -79,3 +79,4 @@ probs <- e.step(all.data.scaled, emobj=emcl, norm=TRUE)$Gamma
 e <- Sys.time()
 cat("EMCluster last e-step (prob retrieval) took", 
     s - e, "\n")
+
