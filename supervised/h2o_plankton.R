@@ -1,21 +1,23 @@
 library(h2o)
 
-## Start a local cluster with 2GB RAM
+## Start a local cluster with 6gb RAM
 localH2O <- h2o.init(ip = "localhost", 
     port = 54321, 
     startH2O = TRUE, 
-    Xmx = '2g')
+    nthreads = -1,
+    max_mem_size='6g')
 
-## Convert Breast Cancer into H2O
-dat <- BreastCancer[, -1]  # remove the ID column
-dat_h2o <- as.h2o(localH2O, dat, key = 'dat')
- 
-## Import MNIST CSV as H2O
-dat_h2o <- h2o.importFile(localH2O, path = ".../mnist_train.csv"
+load("training_pixelandallEBfeat.RData")
+load("testing_scaled_pixelandallEBfeat.RData")
 
+train_dat <- data.frame(class=labels, train.data.scaled)
+test_dat <- data.frame(test.data.scaled)
+
+train_h2o <- as.h2o(localH2O, train_dat, key = 'train_dat')
+test_h2o <- as.h2o(localH2O, test_dat, key = 'test_dat')
 
 model <- h2o.deeplearning(
-    x = 2:785,  # column numbers for predictors
+    x = 2:976,  # column numbers for predictors
     y = 1,   # column number for label
     data = train_h2o, # data in H2O format
     activation = "TanhWithDropout", # or 'Tanh'
@@ -31,3 +33,5 @@ h2o_yhat_test <- h2o.predict(model, test_h2o)
  
 ## Converting H2O format into data frame
 df_yhat_test <- as.data.frame(h2o_yhat_test)
+
+h2o.shutdown(localH2O)

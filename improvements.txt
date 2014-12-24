@@ -16,20 +16,25 @@ SUPERVISED
 - submission 6
     = same as above, with computeFeatures.moment, computeFeatures.haralick, and 30 x 30 pixels
     = RBF (radial basis) kernel instead of linear
+- submission 7
+    = same features as above
+    = h2o deep learning package, 3 layers of 50 nodes, max 100 epochs
+
+
 
 SEMI SUPERVISED
-- submission 7
-    = same as above
+- ideas (previously attempted submission 7)
+    = same features as above
     = use semi-supervised learning
         * using bgmm package instead of EMCluster
         * also, use bagging (10000 training + 40000 testing for each bagging)
-NONE of the semi-supervised packages in R are working, I'm going to export the data to csv and try using the Python s3vm here:
-http://www.uni-oldenburg.de/en/computingscience/ci/staff/fabian-gieseke/code/
- that link doens't even freaking work
-- submission 7
-    = run kmeans on testing, with present centers (centers for each training)
-    = P(x_i in class j) = (1 / dist(x_i, center_j)) / (1 / dist(x_i, center_1) + 1 / dist(x_i, center_2) + ...)
-
+    = NONE of the semi-supervised packages in R are working, I'm going to export the data to csv and try using the Python s3vm here:
+        http://www.uni-oldenburg.de/en/computingscience/ci/staff/fabian-gieseke/code/
+         that link doens't even freaking work
+        - submission 7
+            = run kmeans on testing, with present centers (centers for each training)
+            = P(x_i in class j) = (1 / dist(x_i, center_j)) / (1 / dist(x_i, center_1) + 1 / dist(x_i, center_2) + ...)
+        - kmeans is taking forever, it's been running for 15 hours.  i'll give it another 8 hours ish and if it hasn't finished, I'll use h2o only and try deep learning
 
         
 - submission 8
