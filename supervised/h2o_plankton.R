@@ -8,14 +8,20 @@ localH2O <- h2o.init(ip = "localhost",
     max_mem_size='6g')
 
 load("training_pixelandallEBfeat.RData")
-load("testing_scaled_pixelandallEBfeat.RData")
-
+# add labels into the df, and then push it into the h2o instance
 train_dat <- data.frame(class=labels, train.data.scaled)
-test_dat <- data.frame(test.data.scaled)
-
 train_h2o <- as.h2o(localH2O, train_dat, key = 'train_dat')
-test_h2o <- as.h2o(localH2O, test_dat, key = 'test_dat')
 
+# remove extra variables to preserve memory
+rm(train.means)
+rm(train.sds)
+rm(train.data.scaled)
+rm(labels)
+rm(train_dat)
+
+# train the DNN model
+start.time <- Sys.time()
+print(start.time)
 model <- h2o.deeplearning(
     x = 2:976,  # column numbers for predictors
     y = 1,   # column number for label
@@ -26,12 +32,19 @@ model <- h2o.deeplearning(
     balance_classes = TRUE, 
     hidden = c(50,50,50), # three layers of 50 nodes
     epochs = 100) # max. no. of epochs
+end.time <- Sys.time()
+print(end.time - start.time)
+# took 1.748764 hours (the first time)
+# took X hours (the second time)
 
 
-## Using the DNN model for predictions
-h2o_yhat_test <- h2o.predict(model, test_h2o)
- 
-## Converting H2O format into data frame
-df_yhat_test <- as.data.frame(h2o_yhat_test)
+# save(model, file="h2o_DNN_model_3x50_100.RData")
+# ^^^^^^^^ nooooo wrongggg
+# SAVE IT THE RIGHT WAYYY
+top.wd <- "C:/Users/edz504/Documents/Data Science Projects/Kaggle/plankton"
+model.path <- paste(top.wd, "/supervised",
+    "/DeepLearning_model1", 
+    sep="")
+h2o.saveModel(model, model.path)
 
 h2o.shutdown(localH2O)
