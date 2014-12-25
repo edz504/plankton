@@ -10,7 +10,7 @@ localH2O <- h2o.init(ip = "localhost",
 # load the model into this local cluster
 top.wd <- "C:/Users/edz504/Documents/Data Science Projects/Kaggle/plankton"
 model.path <- paste(top.wd, "/supervised",
-    "/DeepLearning_model1/DeepLearning_85272ab43be1bbb5628dfb26365a4c6f", 
+    "/DeepLearning_model/DeepLearning_85272ab43be1bbb5628dfb26365a4c6f", 
     sep="")
 model <- h2o.loadModel(localH2O, model.path)
 
