@@ -19,6 +19,11 @@ SUPERVISED
 - submission 7
     = same features as above
     = h2o deep learning package, 3 layers of 50 nodes, max 100 epochs
+- submission 8
+    = average 6 and 7 (DNN by itself was not good)
+- submisison 9
+    = add low pass, high pass, medianFilter versions of the features already there ==> 3900 features
+    = also use image histogram (density)
 
 
 

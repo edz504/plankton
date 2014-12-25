@@ -72,4 +72,4 @@ print(end.time2 - start.time2)
 print(paste("Check indicies?:", all(check.inds == 1:130400)))
 print(paste("Check output length?:", check.length == 130400))
 # time to predict all with DNN model, 975 feat trained on all:
-# X
+# 23.35262 minutes

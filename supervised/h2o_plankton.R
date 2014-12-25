@@ -48,3 +48,6 @@ model.path <- paste(top.wd, "/supervised",
 h2o.saveModel(model, model.path)
 
 h2o.shutdown(localH2O)
+
+# check number of rows
+s7 <- read.csv("submission7.csv")
