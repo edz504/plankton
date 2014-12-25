@@ -21,10 +21,17 @@ SUPERVISED
     = h2o deep learning package, 3 layers of 50 nodes, max 100 epochs
 - submission 8
     = average 6 and 7 (DNN by itself was not good)
-- submisison 9
-    = add low pass, high pass, medianFilter versions of the features already there ==> 3900 features
-    = also use image histogram (density)
+- submission 9
+    = use random forests on 975 features
+- submission 10
+    = average svm and rf (6 and 9), 50-50
+- submission 11
+   = average svm and rf (6 and 9), 70-30
+   = BEST VALUE @ 1.7967
 
+more features:
+    = http://www.researchgate.net/publication/228658125_Optimizing_the_number_of_classes_in_automated_zooplankton_classification
+use caret to tune models
 
 
 SEMI SUPERVISED
@@ -40,14 +47,10 @@ SEMI SUPERVISED
             = run kmeans on testing, with present centers (centers for each training)
             = P(x_i in class j) = (1 / dist(x_i, center_j)) / (1 / dist(x_i, center_1) + 1 / dist(x_i, center_2) + ...)
         - kmeans is taking forever, it's been running for 15 hours.  i'll give it another 8 hours ish and if it hasn't finished, I'll use h2o only and try deep learning
+    =     
+    = add medianFilter versions of the features already there ==> 1950 features
+    = SVM took to long to train, could bag -- but not worth it
 
-        
-- submission 8
-    = h2o
-        * http://www.r-bloggers.com/things-to-try-after-user-part-1-deep-learning-with-h2o/
-- submission 9
-    = use ensemble
-        - average probabilities of best pure supervised SVM (submission 6), semi-supervised (EMCluster or bgmm, whichever does better), and deep learning (h2o)
 
 
 ----------------
