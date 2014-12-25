@@ -35,7 +35,7 @@ model <- h2o.deeplearning(
 end.time <- Sys.time()
 print(end.time - start.time)
 # took 1.748764 hours (the first time)
-# took X hours (the second time)
+# took 1.72257 hours (the second time)
 
 
 # save(model, file="h2o_DNN_model_3x50_100.RData")
