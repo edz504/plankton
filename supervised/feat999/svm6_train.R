@@ -10,5 +10,5 @@ end.time <- Sys.time()
 print(end.time - start.time)
 # note: with 999 features, 30336 (all) training data, 
 # and an RBF kernel, time taken 
-# = ???
+# = 4.31994 hours
 save(svm_model, file="svmmodel_999.RData")
